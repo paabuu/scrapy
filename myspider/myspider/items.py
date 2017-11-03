@@ -21,3 +21,7 @@ class DoubanBooksItem(scrapy.Item):
     info = scrapy.Field()
     quote = scrapy.Field()
     image_urls = scrapy.Field()
+
+class TiebaItem(scrapy.Item):
+    images = scrapy.Field()
+    name = scrapy.Field()
