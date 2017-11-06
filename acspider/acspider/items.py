@@ -14,3 +14,4 @@ class AcspiderItem(scrapy.Item):
     title = scrapy.Field()
     time = scrapy.Field()
     content = scrapy.Field()
+    url = scrapy.Field()

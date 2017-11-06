@@ -12,20 +12,28 @@ from scrapy.http import Request
 import scrapy
 
 from pymongo import MongoClient
+import redis
+
+r = redis.Redis(host="127.0.0.1", port=6379, db=0)
 
 client = MongoClient('localhost', 27017)
 db = client.acfun
 collection = db['news']
+
 class AcspiderPipeline(object):
     def process_item(self, item, spider):
         time = item['time']
         item['time'] = time.encode('utf8').replace('发布于 ', '').replace('年 ', '-').replace('月', '-').replace('日', '')
-        db.news.insert({
-            "title": item['title'],
-            "time": item['time'],
-            "content": item['content']
-        })
-        return item
+        if r.sismember('urls', item['url']):
+            pass
+        else:
+            r.sadd('urls', item['url'])
+            db.news.insert({
+                "title": item['title'],
+                "time": item['time'],
+                "content": item['content']
+            })
+            return item
 
 class ImagePipeline(ImagesPipeline):
     def get_media_requests(self, item, info):
@@ -43,9 +51,9 @@ class ImagePipeline(ImagesPipeline):
         else:
             #item['image_paths'] = image_paths
             for index, i in enumerate(item['content']):
-                if i.has_key('image') and len(image_paths) > 0:
+                 if i.has_key('image') and len(image_paths) > 0:
                     item['content'][index]['image'] = image_paths.pop(0)
-                    return item
+            return item
 
 class JsonWithEncodingPipeline(object):
 

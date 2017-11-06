@@ -21,7 +21,7 @@ class NewsSpider(CrawlSpider):
         item['title'] = response.xpath('//span[@class="txt-title-view_1"]/text()').extract()[0]
         item['time'] = response.xpath('//span[@class="time"]/text()').extract()[0]
         item['content'] = self.parse_content(response)
-
+        item['url'] = response.url
         return item
 
     def parse_content(self, response):
