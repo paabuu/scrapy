@@ -70,6 +70,7 @@ ITEM_PIPELINES = {
    # 'acspider.pipelines.JsonWithEncodingPipeline': 304
 }
 IMAGES_STORE = '/Users/yangwenjie/Desktop/scrapy_test/images'
+DOWNLOAD_TIMEOUT = 500
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html

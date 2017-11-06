@@ -43,17 +43,14 @@ class ImagePipeline(ImagesPipeline):
 
     def item_completed(self, results, item, info):
         image_paths = [x['path'] for ok, x in results if ok]      # ok判断是否下载成功
-        print 'image_paths'
-        print len(image_paths)
         if not image_paths:
             raise DropItem("Item contains no images")
-            return item
         else:
             #item['image_paths'] = image_paths
             for index, i in enumerate(item['content']):
-                 if i.has_key('image') and len(image_paths) > 0:
+                 if i.has_key('image'):
                     item['content'][index]['image'] = image_paths.pop(0)
-            return item
+        return item
 
 class JsonWithEncodingPipeline(object):
 
