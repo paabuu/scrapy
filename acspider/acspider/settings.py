@@ -29,7 +29,7 @@ ROBOTSTXT_OBEY = True
 # See also autothrottle settings and docs
 # DOWNLOAD_DELAY = 1
 # The download delay setting will honor only one of:
-CONCURRENT_REQUESTS_PER_DOMAIN = 3
+# CONCURRENT_REQUESTS_PER_DOMAIN = 3
 #CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
@@ -65,9 +65,9 @@ CONCURRENT_REQUESTS_PER_DOMAIN = 3
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'acspider.pipelines.AcspiderPipeline': 300,
+   'acspider.pipelines.AcspiderPipeline': 303,
    'acspider.pipelines.ImagePipeline': 301,
-   'acspider.pipelines.JsonWithEncodingPipeline': 302
+   'acspider.pipelines.JsonWithEncodingPipeline': 304
 }
 IMAGES_STORE = '/Users/yangwenjie/Desktop/scrapy_test/images'
 

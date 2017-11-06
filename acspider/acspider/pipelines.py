@@ -11,8 +11,20 @@ from scrapy.exceptions import DropItem
 from scrapy.http import Request
 import scrapy
 
+from pymongo import MongoClient
+
+client = MongoClient('localhost', 27017)
+db = client.acfun
+collection = db['news']
 class AcspiderPipeline(object):
     def process_item(self, item, spider):
+        time = item['time']
+        item['time'] = time.encode('utf8').replace('发布于 ', '').replace('年 ', '-').replace('月', '-').replace('日', '')
+        db.news.insert({
+            "title": item['title'],
+            "time": item['time'],
+            "content": item['content']
+        })
         return item
 
 class ImagePipeline(ImagesPipeline):
@@ -28,7 +40,7 @@ class ImagePipeline(ImagesPipeline):
         else:
             #item['image_paths'] = image_paths
             for index, i in enumerate(item['content']):
-                if i.has_key('image'):
+                if i.has_key('image') and len(image_paths) > 0:
                     item['content'][index]['image'] = image_paths.pop(0)
         return item
 
