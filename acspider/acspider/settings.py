@@ -67,7 +67,7 @@ ROBOTSTXT_OBEY = True
 ITEM_PIPELINES = {
    'acspider.pipelines.AcspiderPipeline': 303,
    'acspider.pipelines.ImagePipeline': 301,
-   'acspider.pipelines.JsonWithEncodingPipeline': 304
+   # 'acspider.pipelines.JsonWithEncodingPipeline': 304
 }
 IMAGES_STORE = '/Users/yangwenjie/Desktop/scrapy_test/images'
 
