@@ -1,0 +1,26 @@
+{
+  "name": "scrapy_test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yangwenjie5782/scrapy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yangwenjie5782/scrapy/issues"
+  },
+  "homepage": "https://github.com/yangwenjie5782/scrapy#readme",
+  "devDependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.2",
+    "mongoose": "^4.13.0",
+    "multer": "^1.3.0"
+  }
+}
