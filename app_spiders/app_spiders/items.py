@@ -17,3 +17,6 @@ class AcspiderItem(scrapy.Item):
     url = scrapy.Field()
     description = scrapy.Field()
     author = scrapy.Field()
+
+class JianDanItem(scrapy.Item):
+    image_urls = scrapy.Field()

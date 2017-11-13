@@ -41,6 +41,9 @@ class AcspiderPipeline(object):
             return item
 
 class ImagePipeline(ImagesPipeline):
+    def process_item(self, item, spider):
+        print spider.name
+        return item
     def get_media_requests(self, item, info):
         for c in item['content']:
             if c.has_key('image'):
