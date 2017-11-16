@@ -25,7 +25,7 @@ class AcspiderPipeline(object):
         publish_time = item['time']
         item['time'] = publish_time.encode('utf8').replace('发布于 ', '').replace('年 ', '-').replace('月', '-').replace('日', '')
         if r.sismember('urls', item['url']):
-            pass
+            return item
         else:
             r.sadd('urls', item['url'])
             db.news.insert({
@@ -40,10 +40,38 @@ class AcspiderPipeline(object):
             })
             return item
 
-class ImagePipeline(ImagesPipeline):
+class JianshuPipeline(object):
     def process_item(self, item, spider):
-        print spider.name
+        publish_time = item['time']
+        item['time'] = publish_time.encode('utf8').replace('.', '-')
+
+        if r.sismember('urls', item['url']):
+            return item
+        else:
+            r.sadd('urls', item['url'])
+            db.news.insert({
+                "title": item['title'],
+                "publish_time": item['time'],
+                "content": item['content'],
+                "description": item['description'],
+                "origin_site": '简书',
+                "create_time": time.time(),
+                "cover_image": '',
+                "author": item['author']
+            })
+            return item
+
+class JianDanPipeline(object):
+    def process_item(self, item, spider):
+        for image_url in item['image_urls']:
+            if r.sismember('jian_dan_pic', image_url):
+                return item
+            else:
+                r.sadd('jian_dan_pic', image_url)
+                r.lpush('jian_dan_pic_list', 'http:' + image_url)
         return item
+
+class ImagePipeline(ImagesPipeline):
     def get_media_requests(self, item, info):
         for c in item['content']:
             if c.has_key('image'):

@@ -67,19 +67,23 @@ ROBOTSTXT_OBEY = True
 #ITEM_PIPELINES = {
 #    'app_spiders.pipelines.AppSpidersPipeline': 300,
 #}
-ITEM_PIPELINES = {
-   'app_spiders.pipelines.AcspiderPipeline': 303,
-   'app_spiders.pipelines.ImagePipeline': 301,
-   # 'acspider.pipelines.JsonWithEncodingPipeline': 304
-}
+# ITEM_PIPELINES = {
+   # 'app_spiders.pipelines.AcspiderPipeline': 303,
+   # 'app_spiders.pipelines.ImagePipeline': 301,
+   # 'app_spiders.pipelines.JianDanSpider': 302,
+   # 'app_spiders.pipelines.JsonWithEncodingPipeline': 304
+# }
 IMAGES_STORE = '/Users/yangwenjie/Desktop/scrapy_test/images'
 DOWNLOAD_TIMEOUT = 60
+DOWNLOAD_DELAY = 1
 MEDIA_ALLOW_REDIRECTS = True
+DOWNLOADER_MIDDLEWARES = {'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,}
+
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
 #AUTOTHROTTLE_ENABLED = True
 # The initial download delay
-#AUTOTHROTTLE_START_DELAY = 5
+# AUTOTHROTTLE_START_DELAY = 5
 # The maximum download delay to be set in case of high latencies
 #AUTOTHROTTLE_MAX_DELAY = 60
 # The average number of requests Scrapy should be sending in parallel to

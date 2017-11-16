@@ -5,17 +5,12 @@ const multer = require('multer'); // v1.0.5
 const upload = multer(); // for parsing multipart/form-data
 
 const db = require('../db/mongodb');
+const r = require('../db/redis_db');
 
 module.exports = (app) => {
     app.use(cookieParser());
     app.use(bodyParser.json({limit: '50mb'}));
     app.use(bodyParser.urlencoded({limit: '50mb', extended: true, parameterLimit:50000}));
-
-    // app.get('/list', (req, res) => {
-    //     db.get_list((data) => {
-    //         res.json({data})
-    //     });
-    // });
 
     app.post('/api/news_list', upload.array(), (req, res) => {
         const data = req.body;
@@ -32,5 +27,15 @@ module.exports = (app) => {
                 data: response
             })
         })
+    });
+
+    app.post('/api/get_img_list', upload.array(), (req, res) => {
+        const data = req.body;
+        r.lrange('jian_dan_pic_list', data.skip, data.skip + data.limit, function(err, response) {
+            res.json({
+                data: response,
+                end: data.skip + data.limit
+            });
+        });
     })
 }

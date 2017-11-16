@@ -10,7 +10,12 @@ class NewsSpider(CrawlSpider):
     name = 'acfun_spider'
     allowed_domains = ['acfun.cn']
     start_urls = ['http://acfun.cn/v/list110/index.htm']
-
+    custom_settings = {
+        'ITEM_PIPELINES': {
+            'app_spiders.pipelines.ImagePipeline': 100,
+            'app_spiders.pipelines.AcspiderPipeline': 200
+        }
+    }
     rules = (
         Rule(LinkExtractor(allow=("/a/ac\d+")), callback="parse_item"),
         # Rule(LinkExtractor(allow=("index_\d+.htm")), follow=True)
