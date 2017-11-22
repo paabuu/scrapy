@@ -29,13 +29,11 @@ module.exports = (app) => {
         })
     });
 
-    app.post('/api/get_img_list', upload.array(), (req, res) => {
-        const data = req.body;
-        r.lrange('jian_dan_pic_list', data.skip, data.skip + data.limit, function(err, response) {
+    app.get('/api/get_img_list', (req, res) => {
+        r.send_command('SRANDMEMBER', ['jiandan_pic', 10], function(err, response) {
             res.json({
-                data: response,
-                end: data.skip + data.limit
-            });
+                data: response
+            })
         });
     })
 }

@@ -50,7 +50,11 @@ class NewsSpider(CrawlSpider):
             return content.xpath('string(.)').extract()[0].strip() != ""
 
     def m_content(self, content):
-        if content.xpath('./@data-original-src'):
-            return {"image": 'http:' + content.xpath('./@data-original-src').extract()[0]}
+	content_img = content.xpath('./@data-original-src')
+        if content_img:
+	    if 'http:' in content_img:
+		return {"image": content_img.extract()[0]}
+	    else:
+            	return {"image": 'http:' + content.xpath('./@data-original-src').extract()[0]}
         else:
             return {"paragraph": content.xpath('string(.)').extract()[0].strip()}

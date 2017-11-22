@@ -2,7 +2,7 @@
 import scrapy
 from scrapy import Request
 from scrapy.spiders import Spider
-from app_spiders.items import JianDanItem
+from jiandan_spiders.items import JianDanItem
 
 class NewJianDanSpider(Spider):
     name = 'new_jiandan_spider'
@@ -12,7 +12,7 @@ class NewJianDanSpider(Spider):
 
     custom_settings = {
         'ITEM_PIPELINES': {
-            'app_spiders.pipelines.JianDanPipeline': 100,
+            'jiandan_spiders.pipelines.JianDanPipeline': 100
         }
     }
 
@@ -23,6 +23,6 @@ class NewJianDanSpider(Spider):
 
     def parse(self, response):
         item = JianDanItem()
-        urls = response.xpath('//ol[@class="commentlist"]//a[@class="view_img_link"]/@href').extract()
+        urls = response.xpath('//span[@class="img-hash"]/text()').extract()
         item['image_urls'] = urls;
         yield item

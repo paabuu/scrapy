@@ -8,15 +8,10 @@
 import scrapy
 
 
-class AcspiderItem(scrapy.Item):
+class JiandanSpidersItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    title = scrapy.Field()
-    time = scrapy.Field()
-    content = scrapy.Field()
-    url = scrapy.Field()
-    description = scrapy.Field()
-    author = scrapy.Field()
+    pass
 
 class JianDanItem(scrapy.Item):
     image_urls = scrapy.Field()

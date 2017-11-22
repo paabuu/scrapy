@@ -20,26 +20,6 @@ client = MongoClient('localhost', 27017)
 db = client.acfun
 collection = db['news']
 
-class AcspiderPipeline(object):
-    def process_item(self, item, spider):
-        publish_time = item['time']
-        item['time'] = publish_time.encode('utf8').replace('发布于 ', '').replace('年 ', '-').replace('月', '-').replace('日', '')
-        if r.sismember('urls', item['url']):
-            return item
-        else:
-            r.sadd('urls', item['url'])
-            db.news.insert({
-                "title": item['title'],
-                "publish_time": item['time'],
-                "content": item['content'],
-                "description": item['description'],
-                "origin_site": 'ACFUN',
-                "create_time": time.time(),
-                "cover_image": '',
-                "author": item['author']
-            })
-            return item
-
 class JianshuPipeline(object):
     def process_item(self, item, spider):
         publish_time = item['time']
@@ -64,11 +44,10 @@ class JianshuPipeline(object):
 class JianDanPipeline(object):
     def process_item(self, item, spider):
         for image_url in item['image_urls']:
-            if r.sismember('jian_dan_pic', image_url):
+            if r.sismember('jiandan_pic', image_url):
                 return item
             else:
-                r.sadd('jian_dan_pic', image_url)
-                r.rpush('jian_dan_pic_list', image_url)
+                r.sadd('jiandan_pic', image_url)
         return item
 
 class ImagePipeline(ImagesPipeline):
@@ -89,16 +68,3 @@ class ImagePipeline(ImagesPipeline):
                     item['content'][index]['image'] = 'https://ipabu.com/images/insert/' + image_paths.pop(0)
         if len(item['content']) > 0:
             return item
-
-class JsonWithEncodingPipeline(object):
-
-    def __init__(self):
-        self.file = codecs.open('scraped_data_utf8.json', 'w', encoding='utf-8')
-
-    def process_item(self, item, spider):
-        line = json.dumps(dict(item), ensure_ascii=False, indent=4) + "\n"
-        self.file.write(line)
-        return item
-
-    def spider_closed(self, spider):
-        self.file.close()
