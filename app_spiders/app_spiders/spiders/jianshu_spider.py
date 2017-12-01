@@ -11,11 +11,11 @@ class NewsSpider(CrawlSpider):
     allowed_domains = ['jianshu.com']
     start_urls = [
         'http://www.jianshu.com/',
-        'http://www.jianshu.com/recommendations/notes?category_id=56&utm_medium=index-banner-s&utm_source=desktop',
-        'http://www.jianshu.com/trending/weekly?utm_medium=index-banner-s&utm_source=desktop',
-        'http://www.jianshu.com/trending/monthly?utm_medium=index-banner-s&utm_source=desktop',
-        'http://www.jianshu.com/c/e048f1a72e3d?utm_medium=index-banner-s&utm_source=desktop',
-        'http://www.jianshu.com/c/80e7d5d15e71?utm_medium=index-jianshu-daily-page&utm_source=desktop'
+        # 'http://www.jianshu.com/recommendations/notes?category_id=56&utm_medium=index-banner-s&utm_source=desktop',
+        # 'http://www.jianshu.com/trending/weekly?utm_medium=index-banner-s&utm_source=desktop',
+        # 'http://www.jianshu.com/trending/monthly?utm_medium=index-banner-s&utm_source=desktop',
+        # 'http://www.jianshu.com/c/e048f1a72e3d?utm_medium=index-banner-s&utm_source=desktop',
+        # 'http://www.jianshu.com/c/80e7d5d15e71?utm_medium=index-jianshu-daily-page&utm_source=desktop'
     ]
 
     custom_settings = {

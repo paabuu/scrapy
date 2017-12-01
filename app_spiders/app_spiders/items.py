@@ -20,3 +20,6 @@ class AcspiderItem(scrapy.Item):
 
 class JianDanItem(scrapy.Item):
     image_urls = scrapy.Field()
+
+class PengfuItem(scrapy.Item):
+    image_urls = scrapy.Field()

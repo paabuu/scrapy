@@ -40,6 +40,17 @@ class AcspiderPipeline(object):
             })
             return item
 
+class PengfuPipeline(object):
+    def process_item(self, item, spider):
+        for url in item['image_urls']:
+            if r.sismember('pengfu', url):
+                return item
+            else:
+                r.sadd('pengfu', url)
+                r.lpush('pengfu_list', url)
+        return item
+
+
 class JianshuPipeline(object):
     def process_item(self, item, spider):
         publish_time = item['time']

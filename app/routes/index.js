@@ -36,4 +36,14 @@ module.exports = (app) => {
             })
         });
     })
+
+    app.post('/api/get_img_list', upload.array(), (req, res) => {
+        const data = req.body;
+        r.lrange('pengfu_list', data.skip, data.skip + data.limit, function(err, response) {
+            res.json({
+                data: response,
+                end: data.skip + data.limit
+            });
+        });
+    })
 }

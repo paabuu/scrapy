@@ -73,8 +73,8 @@ COOKIES_ENABLED = False
    # 'app_spiders.pipelines.JianDanSpider': 302,
    # 'app_spiders.pipelines.JsonWithEncodingPipeline': 304
 # }
-# IMAGES_STORE = '/Users/yangwenjie/Desktop/scrapy_test/images'
-IMAGES_STORE = '/root/ipabu_app/images/insert'
+IMAGES_STORE = '/Users/yangwenjie/Desktop/scrapy_test/images'
+# IMAGES_STORE = '/root/ipabu_app/images/insert'
 DOWNLOAD_TIMEOUT = 60
 DOWNLOAD_DELAY = 2
 MEDIA_ALLOW_REDIRECTS = True
